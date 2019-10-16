@@ -1,16 +1,21 @@
 module.exports = function zeros(expression) {
 
-  const arrayFromExpression = expression.split("*");
+  const arrayFromExpression = expression.split("*"); // получаем массив элементов
 
-console.log(arrayFromExpression.length);
+//console.log(arrayFromExpression.length);
 
-var result = arrayFromExpression.filter(function(elem){
-  //console.log(elem.slice(-2));
+const result = arrayFromExpression.filter(function(elem){
+  
   if (elem.slice(-2) == "!!")
-  return elem.toString();
+  //console.log(elem.slice(-2));
+  //console.log (parseInt(elem, 10))
+  return elem;
 })
 
-console.log(result);
+var filtered = result.map(function(element){
+      return parseInt(element, 10);
+  });
+console.log(filtered);
 
 let n = parseInt(expression);
 
