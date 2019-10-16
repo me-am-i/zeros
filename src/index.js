@@ -1,23 +1,49 @@
 module.exports = function zeros(expression) {
 
   const arrayFromExpression = expression.split("*"); // получаем массив элементов
-
-//console.log(arrayFromExpression.length);
-
-const result = arrayFromExpression.filter(function(elem){
   
-  if (elem.slice(-2) == "!!")
-  //console.log(elem.slice(-2));
-  //console.log (parseInt(elem, 10))
-  return elem;
-})
+  const doubleFactorial = arrayFromExpression.filter(function(elem){ // получаем только двойные факториалы
+    if (elem.slice(-2) == "!!")
+    return elem;
+  });
 
-var filtered = result.map(function(element){
+  const simpleFactorial =  arrayFromExpression.filter(function(elem){ // получаем только простые факториалы
+    if (elem.slice(-2) != "!!")
+    return elem;
+  });
+
+  const doubleFiltered = doubleFactorial.map(function(element){ // переводим строку в число
       return parseInt(element, 10);
   });
-console.log(filtered);
 
-let n = parseInt(expression);
+  const simpleFiltered = simpleFactorial.map(function(element){ // переводим строку в число
+    return parseInt(element, 10);
+});
+
+
+  const nullOfDouble = doubleFiltered.map(function(num){
+    if (num % 2) {return 0;}
+    else {
+      // тут надо вычислить
+    }
+
+  });
+
+
+  let arr = nullOfDouble;
+  let sum = 0;
+  
+  arr.forEach(function(elem) {
+    sum += elem;
+  });
+  
+  console.log(sum);
+  return sum;
+
+  
+
+
+//let n = parseInt(expression);
 
   function number(n) {
     var counter = 0;
@@ -29,6 +55,8 @@ let n = parseInt(expression);
 
 
   return number(n);
+
+
 
 
   /*
