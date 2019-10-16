@@ -1,8 +1,11 @@
 module.exports = function zeros(expression) {
-  
-n = parseInt(expression);
+
+  const arrayFromExpression = expression.split("*");
+
+console.log(arrayFromExpression);
 
 
+let n = parseInt(expression);
 
   function number(n) {
     var counter = 0;
