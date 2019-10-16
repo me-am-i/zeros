@@ -2,8 +2,15 @@ module.exports = function zeros(expression) {
 
   const arrayFromExpression = expression.split("*");
 
-console.log(arrayFromExpression);
+console.log(arrayFromExpression.length);
 
+var result = arrayFromExpression.filter(function(elem){
+  //console.log(elem.slice(-2));
+  if (elem.slice(-2) == "!!")
+  return elem.toString();
+})
+
+console.log(result);
 
 let n = parseInt(expression);
 
