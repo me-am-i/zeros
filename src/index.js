@@ -41,17 +41,14 @@ module.exports = function zeros(expression) {
 
 //console.log(nullOfDouble);
 
-const nullOfSimple = simpleFiltered.map(function(num){
-  // вычисляем количество нулей
-    return number(num);
+const nullOfSimple = simpleFiltered.map(
+  function zzz (number) {
+  return getZerosCount(number)
+}
+);
 
-      function number(n) {
-        var counter = 0;
-        for (var i = 5; n/i >= 1; i *= 5)
-          counter += Math.floor(n/i);
-        return counter;
-      }  
-});
+console.log(nullOfSimple + " - nullOfSimple");
+
 
 //console.log(nullOfSimple);
 
@@ -80,6 +77,36 @@ console.log(a + b);
 return a+b;
 
 
+// эта функция вычисляет число нулей в в конце обычного факториала
+function getZerosCount(number, base = 10) {
+  let numberOfZeros = number;
+  let primeNumber = base;
+
+  for (let i = 2; i <= base; i++) {
+    if ( primeNumber % i === 0) {
+      let count = 0;
+      while ( primeNumber % i === 0) {
+        primeNumber /= i;     
+        count++;
+      }
+
+      let power = 0;
+      let remainder  = Math.floor(number / i);
+      while (remainder  > 0) {
+        power += remainder ;
+        remainder  = Math.floor(remainder / i);
+      }
+      numberOfZeros = Math.min(numberOfZeros, Math.floor(power / count))
+    }
+  }
+
+  return numberOfZeros;
+}
+
+
+
+
+
 /*
   let arr = nullOfDouble;
   let sum = 0;
@@ -101,7 +128,7 @@ return a+b;
 
 
 //let n = parseInt(expression);
-
+/*
   function number(n) {
     var counter = 0;
     for (var i = 5; n/i >= 1; i *= 5)
@@ -112,7 +139,7 @@ return a+b;
 
 
   return number(n);
-
+*/
 
 
 
