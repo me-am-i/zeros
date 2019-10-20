@@ -7,28 +7,30 @@ module.exports = function zeros(expression) {
     if (elem.slice(-2) == "!!")
     return elem;  });
 
-  const simpleFactorial =  arrayFromExpression.filter(function(elem){
+  const simpleFactorial =  arrayFromExpression.filter(function(el){
     // получаем только простые факториалы
-    if (elem.slice(-2) != "!!")
-    return elem;  });
+    if (el.slice(-2) != "!!")
+    return el;  });
 
   const doubleFiltered = doubleFactorial.map(function(element){
     // переводим строку в число
       return parseInt(element, 10);  });
 
-  const simpleFiltered = simpleFactorial.map(function(element){
+  const simpleFiltered = simpleFactorial.map(function(e){
     // переводим строку в число
-    return parseInt(element, 10);  });
+    return parseInt(e, 10);  });
 
-  const nullOfSimple = simpleFiltered.map(
-  // вычисляем количество нулей в обычном факториале, используем функцию getZerosCount из прошлого задания
-  function zzz (number) {
-  return getZerosCount(number)  });
+  const nullOfSimple = simpleFiltered.map(function(n) {
+  // вычисляем количество нулей в обычном факториале
+    var result = 0;
+    while (n = Math.floor(n / 5)) result += n;
+    return result;
+ });
 
 console.log(nullOfSimple + " - nullOfSimple");
-
-
-const nullOfDouble = doubleFiltered.map(function(num){
+/*
+var nullOfDouble = 0;
+var nullOfDouble = doubleFiltered.map(function(num){
   // вычисляем количество нулей
   var count5 = 0;
   var count2 = 0;
@@ -68,26 +70,32 @@ const nullOfDouble = doubleFiltered.map(function(num){
      if ((count5 == 0) || (count2 == 0) || ((count2 == 0)&&(count5 == 0))) {
        count += 0;
      }
+//   console.log(`count = ${count}`)
    
-   
-   return count;
+   return count ? count : 0;
        
 
 
 
 });
 
+*/
 
+console.log(nullOfSimple.reduce((a, b) => a + b, 0));
 
-
+/*
 var k = 0;
 var a = 0;
 
-while (k < (nullOfSimple.length - 1)) {
+do {
   a = a + nullOfSimple[k];
   k++;
-}
 
+
+console.log(`a= ${a} и k= ${k}`);
+
+} while (k < (nullOfSimple.length - 1))
+*/
 /*
 var b = 0;
     k = 0;
@@ -100,9 +108,9 @@ while (k < (nullOfDouble.length - 1)) {
 */
 
 
-console.log(a + nullOfDouble[0]);
+//console.log(`a= ${a} и NUD[0]= ${nullOfDouble[0]}`);
 
-return a + nullOfDouble[0];
+return nullOfSimple.reduce((a, b) => a + b, 0);// + nullOfDouble[0];
 
 
 
