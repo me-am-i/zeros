@@ -5,52 +5,80 @@ module.exports = function zeros(expression) {
   const doubleFactorial = arrayFromExpression.filter(function(elem){
     // получаем только двойные факториалы
     if (elem.slice(-2) == "!!")
-    return elem;
-  });
+    return elem;  });
 
   const simpleFactorial =  arrayFromExpression.filter(function(elem){
     // получаем только простые факториалы
     if (elem.slice(-2) != "!!")
-    return elem;
-  });
+    return elem;  });
 
   const doubleFiltered = doubleFactorial.map(function(element){
     // переводим строку в число
-      return parseInt(element, 10);
-  });
+      return parseInt(element, 10);  });
 
   const simpleFiltered = simpleFactorial.map(function(element){
     // переводим строку в число
-    return parseInt(element, 10);
-});
+    return parseInt(element, 10);  });
 
-  const nullOfDouble = doubleFiltered.map(function(num){
-    // вычисляем количество нулей
-    if (num % 2) {return 0;}
-    else {
-      function number1(n) {
-          let counter = 0;
-          for (let i = 10; n/i >= 1; i *= 10)
-            counter += Math.floor(n/i);
-          return counter;
-        }
-      return number1(num);
-    }
-
-  });
-
-//console.log(nullOfDouble);
-
-const nullOfSimple = simpleFiltered.map(
+  const nullOfSimple = simpleFiltered.map(
+  // вычисляем количество нулей в обычном факториале, используем функцию getZerosCount из прошлого задания
   function zzz (number) {
-  return getZerosCount(number)
-}
-);
+  return getZerosCount(number)  });
 
 console.log(nullOfSimple + " - nullOfSimple");
 
 
-//console.log(nullOfSimple);
+const nullOfDouble = doubleFiltered.map(function(num){
+  // вычисляем количество нулей
+  var count5 = 0;
+  var count2 = 0;
+  var count = 0;
+  {
+    if (num % 2 == 0) { 
+           for (var i = 5; num/(2*i) >= 1; i *= 5) {
+                  count5 += Math.floor(num/(2*i));
+           }
+           for (var i = 2; num/i >= 1; i *= 2) {
+                  count2 += Math.floor(num/i); 
+           }            
+          }
+    else {
+           var t15 = 0;
+           var t25 = 0;
+
+           for (var i = 5; (Number(num)+1)/i >= 1; i *= 5) {
+                 //console.log(Number(num)+1);
+                 t15 += Math.floor((Number(num)+1)/i);
+               }
+           for (var i = 5; (Number(num)+1)/(2*i) >= 1; i *= 5) {
+                      t25 += Math.floor((Number(num)+1)/(2*i));
+               }
+           count5 += (t15 - t25);
+           }
+        }
+        if ((count5 != 0) && (count2 != 0)) {
+          if (count5 != count2) {
+           count += Math.min(count5, count2);
+          }
+          else {
+           count +=count2;
+          }
+     }
+   
+     if ((count5 == 0) || (count2 == 0) || ((count2 == 0)&&(count5 == 0))) {
+       count += 0;
+     }
+   
+   
+   return count;
+       
+
+
+
+});
+
+
+
 
 var k = 0;
 var a = 0;
@@ -60,25 +88,25 @@ while (k < (nullOfSimple.length - 1)) {
   k++;
 }
 
-var k = 0;
+/*
 var b = 0;
+    k = 0;
 
 while (k < (nullOfDouble.length - 1)) {
   b = b + nullOfDouble[k];
   k++;
 }
 
-
-//let a = nullOfSimple[3] != undefined ? nullOfSimple[3] : 0; + nullOfSimple[4] != undefined ? nullOfSimple[4] : 0;
-
+*/
 
 
-console.log(a + b);
-return a+b;
+console.log(a + nullOfDouble[0]);
+
+return a + nullOfDouble[0];
 
 
-// эта функция вычисляет число нулей в в конце обычного факториала
-function getZerosCount(number, base = 10) {
+
+function getZerosCount(number, base = 10) { // эта функция вычисляет число нулей в в конце обычного факториала, взята из прошлого задания
   let numberOfZeros = number;
   let primeNumber = base;
 
@@ -104,52 +132,6 @@ function getZerosCount(number, base = 10) {
 }
 
 
-
-
-
-/*
-  let arr = nullOfDouble;
-  let sum = 0;
-  
-  arr.forEach(function(elem) {
-    sum += elem;
-  });
-  
-  let arr = nullOfSimple;
-    
-  arr.forEach(function(elem) {
-    sum += elem;
-  });
-
-  console.log(sum);
-  return sum;
-
-  */
-
-
-//let n = parseInt(expression);
-/*
-  function number(n) {
-    var counter = 0;
-    for (var i = 5; n/i >= 1; i *= 5)
-      counter += Math.floor(n/i);
-    return counter;
-  }
-
-
-
-  return number(n);
-*/
-
-
-
-  /*
-  let counter = 0;
-  for (let index = 0; index < array.length; index++) {
-    const element = array[index];
-    
-  }*/
-
 }
 /*
 
@@ -166,13 +148,6 @@ function getZerosCount(number, base = 10) {
 сложить кол-во
 
 вернуть результат
-
-
-
-
-
-
-
 
 
 */
